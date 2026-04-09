@@ -1,0 +1,71 @@
+Methodology (Workflow of the Project)
+
+Step 1: Dataset & Preprocessing
+Used the Breast Cancer Wisconsin (Diagnostic) dataset.
+Performed:
+- Label encoding (Benign = 0, Malignant = 1)
+- Z-score normalization for feature scaling
+- Stratified data splitting to maintain class balance
+
+Step 2: Feature Engineering
+New features were created to improve prediction quality:
+- Delta Features: Difference between worst and mean values
+- Ratio Features: Relationship between feature values
+- Severity Features: Aggregated indicators of tumor severity
+
+These features help capture tumor progression and morphology.
+
+Step 3: Feature Selection
+Applied Random Forest-based Recursive Feature Elimination (RFE).
+Selected the Top 15 most important features.
+This reduces redundancy and improves model interpretability.
+
+Step 4: Base Models
+Trained multiple machine learning models:
+- Logistic Regression
+- Support Vector Machine (SVM)
+- Random Forest
+- Gradient Boosting
+- XGBoost
+
+Each model contributes differently to prediction.
+
+Step 5: Hyperparameter Tuning
+Used GridSearchCV.
+Optimized models based on Recall.
+Recall is prioritized because minimizing false negatives is critical in medical diagnosis.
+
+Step 6: Hybrid Ensemble Model
+Combined all models using Soft Voting.
+Final prediction is based on average probability.
+This improves overall accuracy and stability.
+
+Step 7: Nested Cross-Validation
+Used 3x5 Nested Cross-Validation:
+- Inner loop: Hyperparameter tuning
+- Outer loop: Model evaluation
+
+This ensures unbiased and reliable performance.
+Step 8: Model Evaluation
+Performance measured using:
+- Accuracy
+- Precision
+- Recall
+- F1-score
+- ROC-AUC and PR-AUC
+The model achieved around 98% performance across metrics.
+
+Step 9: Explainability (XAI)
+Used multiple techniques to interpret the model:
+- SHAP: Feature impact (global and local)
+- LIME: Individual prediction explanation
+- ELI5: Feature importance
+This makes the model transparent and clinically trustworthy.
+
+Step 10: Statistical Validation
+Applied McNemar’s Test.
+Verified that performance improvements are statistically reliable.
+Overall Pipeline
+Dataset → Preprocessing → Feature Engineering → Feature Selection
+→ Model Training → Hyperparameter Tuning → Ensemble Model
+→ Nested Cross Validation → Evaluation → Explainability
